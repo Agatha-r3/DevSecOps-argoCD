@@ -1,0 +1,30 @@
+name: Container Security Policy
+
+security:
+  container_scanning:
+    enabled: true
+    fail_on_severity: high
+    
+  image_signing:
+    required: true
+    keyless: true
+    
+  sbom_generation:
+    enabled: true
+    format: spdx-json
+    
+  vulnerability_scanning:
+    tools:
+      - trivy
+      - snyk
+    schedule: daily
+    
+  access_control:
+    registry_access: private
+    pull_permissions: collaborators
+    push_permissions: maintainers
+    
+  compliance:
+    require_signed_commits: true
+    require_status_checks: true
+    enforce_admins: true
